@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>CT Brain Scan Demo</title>
+  <style>
+    /* Viền xanh ba phía */
+    body {
+      margin: 0;
+      padding: 0;
+      border-left: 8px solid #4CB1F7;
+      border-right: 8px solid #4CB1F7;
+      border-top: 8px solid #4CB1F7;
+      font-family: Arial, sans-serif;
+      background: #f0f8ff;
+    }
+
+    /* Banner vàng */
+    .banner {
+      background: #FFEB3B;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+    }
+    .banner .left, .banner .right {
+      display: flex;
+      align-items: center;
+    }
+    .banner img {
+      width: 32px;
+      height: 32px;
+      margin-right: 8px;
+    }
+    .banner .left span {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .banner .right img {
+      margin-right: 4px;
+    }
+    .banner .right span {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    /* Nội dung chính */
+    .container {
+      max-width: 700px;
+      margin: 40px auto;
+      text-align: center;
+    }
+    h1 {
+      color: #007ACC;
+    }
+    .upload-area {
+      margin-top: 20px;
+      border: 2px dashed #007ACC;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    .upload-area input {
+      margin-bottom: 10px;
+    }
+    .upload-area p {
+      margin: 10px 0;
+      font-size: 14px;
+      color: #333;
+    }
+    #preview img {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin-top: 20px;
+    }
+    #output {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #008000;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Banner trên cùng -->
+  <div class="banner">
+    <div class="left">
+      <!-- Icon dấu + đỏ -->
+      <img src="hospital-icon.png" alt="Hospital logo">
+      <span>Bệnh viện Đại học Y Hà Nội</span>
+    </div>
+    <div class="right">
+      <!-- Icon điện thoại -->
+      <img src="phone-icon.png" alt="Phone icon">
+      <span>069669699</span>
+    </div>
+  </div>
+
+  <!-- Nội dung demo -->
+  <div class="container">
+    <h1>CT Brain Scan Demo</h1>
+    <p>Tải ảnh hoặc dán ảnh CT não để nhận kết quả phân tích giả lập.</p>
+
+    <div class="upload-area" id="uploadArea" contenteditable="true">
+      <!-- nút chọn file -->
+      <input type="file" id="fileInput" accept="image/*"><br>
+      <p>Hoặc nhấn <strong>Ctrl + V</strong> để dán ảnh từ clipboard</p>
+    </div>
+
+    <!-- preview và kết quả -->
+    <div id="preview"></div>
+    <div id="output"></div>
+  </div>
+
+  <script>
+    const uploadArea = document.getElementById('uploadArea');
+    const fileInput  = document.getElementById('fileInput');
+    const preview    = document.getElementById('preview');
+    const output     = document.getElementById('output');
+
+    // Xử lý paste từ clipboard
+    uploadArea.addEventListener('paste', e => {
+      const items = e.clipboardData.items;
+      for (let i=0; i<items.length; i++) {
+        if (items[i].type.indexOf('image') !== -1) {
+          const blob = items[i].getAsFile();
+          showImage(blob);
+        }
+      }
+    });
+
+    // Xử lý chọn file từ máy
+    fileInput.addEventListener('change', e => {
+      const file = e.target.files[0];
+      if (file) showImage(file);
+    });
+
+    // Hàm hiển thị ảnh + tạo kết quả giả lập
+    function showImage(file) {
+      const reader = new FileReader();
+      reader.onload = function(ev) {
+        preview.innerHTML = `<img src="${ev.target.result}" alt="CT Scan">`;
+        // Kết quả demo ngẫu nhiên
+        const fakeResults = [
+          "Không có dấu hiệu bất thường.",
+          "Phát hiện khối u nhỏ ở vùng trán.",
+          "Não thất hơi giãn nhẹ.",
+          "Có dấu hiệu xuất huyết nhỏ.",
+          "Có mảng tổn thương ở thuỳ thái dương."
+        ];
+        const r = fakeResults[Math.floor(Math.random()*fakeResults.length)];
+        output.textContent = "Kết quả chẩn đoán: " + r;
+      };
+      reader.readAsDataURL(file);
+    }
+  </script>
+
+</body>
+</html>
