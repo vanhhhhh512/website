@@ -2,17 +2,71 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chẩn đoán u não bằng MRI</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
   <style>
-    /* Viền xanh ba phía */
+    /* Viền xanh ba phía + font Roboto */
     body {
       margin: 0;
       padding: 0;
       border-left: 8px solid #4CB1F7;
       border-right: 8px solid #4CB1F7;
       border-top: 8px solid #4CB1F7;
-      font-family: Arial, sans-serif;
+      font-family: 'Roboto', Arial, sans-serif;
       background: #f0f8ff;
+    }
+
+    /* Thanh menu ngang trên cùng */
+    .top-bar {
+      background-color: #42A5F5;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 20px;
+      font-size: 14px;
+      color: white;
+    }
+    .top-bar .left, .top-bar .right {
+      display: flex;
+      align-items: center;
+    }
+    .top-bar .left div, .top-bar .right div {
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+    .top-bar .right .search-icon {
+      margin-left: 8px;
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Thanh menu logo + các mục chính */
+    .navbar {
+      background-color: #1A237E;
+      display: flex;
+      align-items: center;
+      color: white;
+    }
+    .navbar img.logo {
+      height: 64px;
+      margin: 0 20px;
+    }
+    .navbar .menu {
+      display: flex;
+      flex: 1;
+    }
+    .navbar .menu div {
+      padding: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      text-align: center;
+      flex-grow: 1;
+    }
+    .navbar .menu div:hover {
+      background-color: #283593;
     }
 
     /* Banner vàng */
@@ -22,6 +76,8 @@
       justify-content: space-between;
       align-items: center;
       padding: 10px 20px;
+      border-radius: 0 0 16px 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
     .banner .left, .banner .right {
       display: flex;
@@ -44,39 +100,6 @@
       font-weight: bold;
     }
 
-    /* Menu giống UET */
-    .uet-menu {
-      background-color: #0D2C7B;
-      padding: 0;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-
-    .uet-menu ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .uet-menu li {
-      margin: 0;
-    }
-
-    .uet-menu a {
-      display: block;
-      padding: 14px 20px;
-      text-decoration: none;
-      color: white;
-      font-weight: bold;
-      transition: background-color 0.3s ease;
-    }
-
-    .uet-menu a:hover {
-      background-color: #1A3DA4;
-    }
-
     /* Nội dung chính */
     .container {
       max-width: 700px;
@@ -91,6 +114,11 @@
       border: 2px dashed #007ACC;
       padding: 20px;
       border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+    .upload-area:hover {
+      background-color: #e0f7ff;
+      cursor: pointer;
     }
     .upload-area input {
       margin-bottom: 10px;
@@ -116,33 +144,48 @@
 </head>
 <body>
 
-  <!-- Banner trên cùng -->
+  <!-- Thanh menu ngang trên cùng -->
+  <div class="top-bar">
+    <div class="left">
+      <div>ĐHQGHN</div>
+      <div>Email</div>
+      <div>E-Office</div>
+      <div>Chuyên san CNTT &amp; TT</div>
+      <div>Ứng dụng Công nghệ thông tin</div>
+      <div>Học liệu số</div>
+    </div>
+    <div class="right">
+      <div>English</div>
+      <img src="search-icon.png" alt="Search" class="search-icon">
+    </div>
+  </div>
+
+  <!-- Thanh menu logo + các mục chính -->
+  <div class="navbar">
+    <img src="uet-logo.png" alt="UET Logo" class="logo">
+    <div class="menu">
+      <div>Giới thiệu</div>
+      <div>Đào tạo</div>
+      <div>Sinh viên</div>
+      <div>Khoa học – Công nghệ</div>
+      <div>Tuyển sinh</div>
+      <div>Tuyển dụng</div>
+      <div>Khoa – Viện</div>
+      <div>Olympic</div>
+    </div>
+  </div>
+
+  <!-- Banner vàng -->
   <div class="banner">
     <div class="left">
-      <!-- Icon dấu + đỏ -->
       <img src="hospital-icon.png" alt="Hospital logo">
       <span>Trường Đại học Công Nghệ - Đại học Quốc gia Hà Nội</span>
     </div>
     <div class="right">
-      <!-- Icon điện thoại -->
       <img src="phone-icon.png" alt="Phone icon">
       <span>069669699</span>
     </div>
   </div>
-
-  <!-- Thanh menu giống UET -->
-  <nav class="uet-menu">
-    <ul>
-      <li><a href="#">Giới thiệu</a></li>
-      <li><a href="#">Đào tạo</a></li>
-      <li><a href="#">Sinh viên</a></li>
-      <li><a href="#">Khoa học – Công nghệ</a></li>
-      <li><a href="#">Tuyển sinh</a></li>
-      <li><a href="#">Tuyển dụng</a></li>
-      <li><a href="#">Khoa – Viện</a></li>
-      <li><a href="#">Olympic</a></li>
-    </ul>
-  </nav>
 
   <!-- Nội dung demo -->
   <div class="container">
@@ -150,12 +193,10 @@
     <p>Tải lên hoặc dán ảnh MRI để nhận kết quả phân tích khối u não.</p>
 
     <div class="upload-area" id="uploadArea" contenteditable="true">
-      <!-- nút chọn file -->
       <input type="file" id="fileInput" accept="image/*"><br>
       <p>Hoặc nhấn <strong>Ctrl + V</strong> để dán ảnh từ clipboard</p>
     </div>
 
-    <!-- preview và kết quả -->
     <div id="preview"></div>
     <div id="output"></div>
   </div>
@@ -169,7 +210,7 @@
     // Xử lý paste từ clipboard
     uploadArea.addEventListener('paste', e => {
       const items = e.clipboardData.items;
-      for (let i=0; i<items.length; i++) {
+      for (let i = 0; i < items.length; i++) {
         if (items[i].type.indexOf('image') !== -1) {
           const blob = items[i].getAsFile();
           showImage(blob);
@@ -188,7 +229,6 @@
       const reader = new FileReader();
       reader.onload = function(ev) {
         preview.innerHTML = `<img src="${ev.target.result}" alt="CT Scan">`;
-        // Kết quả demo ngẫu nhiên
         const fakeResults = [
           "Không có dấu hiệu bất thường.",
           "Phát hiện khối u nhỏ ở vùng trán.",
@@ -196,7 +236,7 @@
           "Có dấu hiệu xuất huyết nhỏ.",
           "Có mảng tổn thương ở thuỳ thái dương."
         ];
-        const r = fakeResults[Math.floor(Math.random()*fakeResults.length)];
+        const r = fakeResults[Math.floor(Math.random() * fakeResults.length)];
         output.textContent = "Kết quả chẩn đoán: " + r;
       };
       reader.readAsDataURL(file);
