@@ -4,12 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chẩn đoán u não bằng MRI</title>
-
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
   <style>
-    /* Body styles */
     body {
       margin: 0;
       padding: 0;
@@ -20,59 +17,24 @@
       display: flex;
     }
 
-    /* Sidebar */
-    .sidebar {
-      width: 220px;
-      background-color: rgba(26, 35, 126, 0.95);
-      color: white;
+    /* Sidebar as image */
+    .sidebar-img {
+      width: 100px;
       height: 100vh;
+      object-fit: cover;
       position: fixed;
       top: 0;
       left: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 20px;
-    }
-
-    .sidebar img {
-      width: 80px;
-      margin-bottom: 20px;
-    }
-
-    .menu-item {
-      display: flex;
-      align-items: center;
-      width: 100%;
-      padding: 15px 0;
-      font-size: 16px;
-      font-weight: bold;
-      text-align: left;
-      cursor: pointer;
-    }
-
-    .menu-item:hover {
-      background-color: rgba(40, 53, 147, 0.95);
-    }
-
-    .menu-item img {
-      width: 24px;
-      height: 24px;
-      margin: 0 10px;
-    }
-
-    .menu-item span {
-      flex-grow: 1;
+      z-index: 10;
     }
 
     /* Main content */
     .main-content {
-      margin-left: 220px;
+      margin-left: 100px;
       flex: 1;
       padding: 20px;
     }
 
-    /* Banner */
     .banner {
       background: rgba(245, 245, 245, 0.9);
       color: black;
@@ -90,7 +52,6 @@
       margin-right: 8px;
     }
 
-    /* Container */
     .container {
       max-width: 700px;
       margin: 40px auto;
@@ -138,38 +99,23 @@
       color: #008000;
       font-weight: bold;
     }
+
+    @media (max-width: 768px) {
+      .sidebar-img {
+        display: none;
+      }
+
+      .main-content {
+        margin-left: 0;
+        padding: 10px;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <img src="uet-logo.png" alt="UET Logo">
-    <div class="menu-item">
-      <img src="account-icon.png" alt="Account Icon">
-      <span>Account</span>
-    </div>
-    <div class="menu-item">
-      <img src="dashboard-icon.png" alt="Dashboard Icon">
-      <span>Dashboard</span>
-    </div>
-    <div class="menu-item">
-      <img src="courses-icon.png" alt="Courses Icon">
-      <span>Courses</span>
-    </div>
-    <div class="menu-item">
-      <img src="calendar-icon.png" alt="Calendar Icon">
-      <span>Calendar</span>
-    </div>
-    <div class="menu-item">
-      <img src="inbox-icon.png" alt="Inbox Icon">
-      <span>Inbox</span>
-    </div>
-    <div class="menu-item">
-      <img src="help-icon.png" alt="Help Icon">
-      <span>Help</span>
-    </div>
-  </div>
+  <!-- Sidebar image -->
+  <img src="4adedcff-4558-4151-9d63-f0831754eed3.png" alt="Sidebar Menu" class="sidebar-img">
 
   <!-- Main content -->
   <div class="main-content">
@@ -228,6 +174,10 @@
       const reader = new FileReader();
       reader.onload = function(ev) {
         preview.innerHTML = `<img src="${ev.target.result}" alt="Preview Image">`;
+        output.innerHTML = "Đang phân tích...";
+        setTimeout(() => {
+          output.innerHTML = "Kết quả: Phát hiện khối u nhỏ (giả lập)";
+        }, 2000);
       };
       reader.readAsDataURL(file);
     }
