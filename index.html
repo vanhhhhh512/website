@@ -9,7 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
   <style>
-    /* Viền xanh ba phía + font Roboto */
     body {
       margin: 0;
       padding: 0;
@@ -18,58 +17,53 @@
       border-top: 8px solid #4CB1F7;
       font-family: 'Roboto', Arial, sans-serif;
       background: #f0f8ff;
+      display: flex;
     }
 
-    /* Thanh menu ngang trên cùng */
-    .top-bar {
-      background-color: #42A5F5;
-      display: flex;
-      justify-content: space-between;
-      padding: 0 20px;
-      font-size: 14px;
-      color: white;
-    }
-    .top-bar .left, .top-bar .right {
-      display: flex;
-      align-items: center;
-    }
-    .top-bar .left div, .top-bar .right div {
-      padding: 8px 12px;
-      cursor: pointer;
-    }
-    .top-bar .right .search-icon {
-      margin-left: 8px;
-      width: 16px;
-      height: 16px;
-    }
-
-    /* Thanh menu logo + các mục chính */
-    .navbar {
+    /* Sidebar */
+    .sidebar {
+      width: 220px;
       background-color: #1A237E;
-      display: flex;
-      align-items: center;
       color: white;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding-top: 20px;
     }
-    .navbar img.logo {
-      height: 64px;
-      margin: 0 20px;
+
+    .sidebar .logo {
+      display: block;
+      margin: 0 auto 20px auto;
+      width: 80px;
     }
-    .navbar .menu {
+
+    .sidebar .menu {
       display: flex;
-      flex: 1;
+      flex-direction: column;
+      align-items: center;
     }
-    .navbar .menu div {
-      padding: 20px;
+
+    .sidebar .menu div {
+      padding: 15px 0;
+      width: 100%;
+      text-align: center;
       font-weight: bold;
       cursor: pointer;
-      text-align: center;
-      flex-grow: 1;
     }
-    .navbar .menu div:hover {
+
+    .sidebar .menu div:hover {
       background-color: #283593;
     }
 
-    /* Banner vàng */
+    /* Main content */
+    .main-content {
+      margin-left: 220px;
+      flex: 1;
+      padding: 20px;
+    }
+
+    /* Banner */
     .banner {
       background: #f5f5f5;
       display: flex;
@@ -79,36 +73,34 @@
       border-radius: 0 0 16px 16px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
+
     .banner .left, .banner .right {
       display: flex;
       align-items: center;
     }
+
     .banner img {
       width: 32px;
       height: 32px;
       margin-right: 8px;
     }
-    .banner .left span {
-      font-size: 18px;
-      font-weight: bold;
-    }
-    .banner .right img {
-      margin-right: 4px;
-    }
-    .banner .right span {
+
+    .banner .left span, .banner .right span {
       font-size: 18px;
       font-weight: bold;
     }
 
-    /* Nội dung chính */
+    /* Container */
     .container {
       max-width: 700px;
       margin: 40px auto;
       text-align: center;
     }
+
     h1 {
       color: #007ACC;
     }
+
     .upload-area {
       margin-top: 20px;
       border: 2px dashed #007ACC;
@@ -116,24 +108,29 @@
       border-radius: 8px;
       transition: background-color 0.3s ease;
     }
+
     .upload-area:hover {
       background-color: #e0f7ff;
       cursor: pointer;
     }
+
     .upload-area input {
       margin-bottom: 10px;
     }
+
     .upload-area p {
       margin: 10px 0;
       font-size: 14px;
       color: #333;
     }
+
     #preview img {
       max-width: 100%;
       border-radius: 8px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       margin-top: 20px;
     }
+
     #output {
       margin-top: 20px;
       font-size: 18px;
@@ -144,24 +141,8 @@
 </head>
 <body>
 
-  <!-- Thanh menu ngang trên cùng -->
-  <div class="top-bar">
-    <div class="left">
-      <div>ĐHQGHN</div>
-      <div>Email</div>
-      <div>E-Office</div>
-      <div>Chuyên san CNTT &amp; TT</div>
-      <div>Ứng dụng Công nghệ thông tin</div>
-      <div>Học liệu số</div>
-    </div>
-    <div class="right">
-      <div>English</div>
-      <img src="search-icon.png" alt="Search" class="search-icon">
-    </div>
-  </div>
-
-  <!-- Thanh menu logo + các mục chính -->
-  <div class="navbar">
+  <!-- Sidebar -->
+  <div class="sidebar">
     <img src="uet-logo.png" alt="UET Logo" class="logo">
     <div class="menu">
       <div>Giới thiệu</div>
@@ -175,30 +156,33 @@
     </div>
   </div>
 
-  <!-- Banner vàng -->
-  <div class="banner">
-    <div class="left">
-      <img src="hospital-icon.png" alt="Hospital logo">
-      <span>Trường Đại học Công Nghệ - Đại học Quốc gia Hà Nội</span>
-    </div>
-    <div class="right">
-      <img src="phone-icon.png" alt="Phone icon">
-      <span>069669699</span>
-    </div>
-  </div>
-
-  <!-- Nội dung demo -->
-  <div class="container">
-    <h1>UNetBrainSeg</h1>
-    <p>Tải lên hoặc dán ảnh MRI để nhận kết quả phân tích khối u não.</p>
-
-    <div class="upload-area" id="uploadArea" contenteditable="true">
-      <input type="file" id="fileInput" accept="image/*"><br>
-      <p>Hoặc nhấn <strong>Ctrl + V</strong> để dán ảnh từ clipboard</p>
+  <!-- Main content -->
+  <div class="main-content">
+    <!-- Banner -->
+    <div class="banner">
+      <div class="left">
+        <img src="hospital-icon.png" alt="Hospital logo">
+        <span>Trường Đại học Công Nghệ - Đại học Quốc gia Hà Nội</span>
+      </div>
+      <div class="right">
+        <img src="phone-icon.png" alt="Phone icon">
+        <span>069669699</span>
+      </div>
     </div>
 
-    <div id="preview"></div>
-    <div id="output"></div>
+    <!-- Container -->
+    <div class="container">
+      <h1>UNetBrainSeg</h1>
+      <p>Tải lên hoặc dán ảnh MRI để nhận kết quả phân tích khối u não.</p>
+
+      <div class="upload-area" id="uploadArea" contenteditable="true">
+        <input type="file" id="fileInput" accept="image/*"><br>
+        <p>Hoặc nhấn <strong>Ctrl + V</strong> để dán ảnh từ clipboard</p>
+      </div>
+
+      <div id="preview"></div>
+      <div id="output"></div>
+    </div>
   </div>
 
   <script>
@@ -228,20 +212,6 @@
     function showImage(file) {
       const reader = new FileReader();
       reader.onload = function(ev) {
-        preview.innerHTML = `<img src="${ev.target.result}" alt="CT Scan">`;
-        const fakeResults = [
-          "Không có dấu hiệu bất thường.",
-          "Phát hiện khối u nhỏ ở vùng trán.",
-          "Não thất hơi giãn nhẹ.",
-          "Có dấu hiệu xuất huyết nhỏ.",
-          "Có mảng tổn thương ở thuỳ thái dương."
-        ];
-        const r = fakeResults[Math.floor(Math.random() * fakeResults.length)];
-        output.textContent = "Kết quả chẩn đoán: " + r;
-      };
-      reader.readAsDataURL(file);
-    }
-  </script>
-
-</body>
-</html>
+        preview.inner
+::contentReference[oaicite:5]{index=5}
+ 
