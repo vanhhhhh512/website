@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+""<!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
@@ -13,10 +13,12 @@
       margin: 0;
       padding: 0;
       font-family: 'Roboto', Arial, sans-serif;
-      color: white;...
+      color: white;
+      display: flex;
       background: none;
     }
 
+    /* Video Background */
     #background-video {
       position: fixed;
       top: 0;
@@ -27,20 +29,115 @@
       z-index: -1;
     }
 
-    .main-content {
-      position: relative;
+    /* Sidebar as image */
+    .sidebar-img-wrapper {
+      width: 70px;
+      background-color: #002855;
+      padding: 10px 5px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
       z-index: 10;
+    }
+
+    .sidebar-img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+
+    .sidebar-bg-fill {
+      flex-grow: 1;
+      width: 100%;
+      background-color: #002855;
+    }
+
+    /* Main content */
+    .main-content {
+      margin-left: 90px;
+      flex: 1;
+      padding: 20px;
+      position: relative;
+      z-index: 5;
+    }
+
+    /* Banner */
+    .banner {
+      background: rgba(245, 245, 245, 0.9);
+      color: black;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      border-radius: 0 0 16px 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .banner img {
+      width: 32px;
+      height: 32px;
+      margin-right: 8px;
+    }
+
+    /* Container */
+    .container {
+      max-width: 700px;
+      margin: 40px auto;
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    h1 {
+      color: #007ACC;
+    }
+
+    .upload-area {
+      margin-top: 20px;
+      border: 2px dashed #007ACC;
+      padding: 20px;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    .upload-area:hover {
+      background-color: rgba(224, 247, 255, 0.95);
+      cursor: pointer;
+    }
+
+    #preview img {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
 
+  <!-- Video Background -->
   <video autoplay muted loop id="background-video">
     <source src="background-video.mp4" type="video/mp4">
     Trình duyệt của bạn không hỗ trợ video nền.
   </video>
 
+  <!-- Sidebar image -->
+  <div class="sidebar-img-wrapper">
+    <img src="4adedcff-4558-4151-9d63-f0831754eed3.png" alt="Sidebar Menu" class="sidebar-img">
+    <div class="sidebar-bg-fill"></div>
+  </div>
+
+  <!-- Main content -->
   <div class="main-content">
+    <!-- Banner -->
     <div class="banner">
       <div class="left">
         <img src="hospital-icon.png" alt="Hospital logo">
@@ -52,6 +149,7 @@
       </div>
     </div>
 
+    <!-- Container -->
     <div class="container">
       <h1>UNetBrainSeg</h1>
       <p>Tải lên hoặc dán ảnh MRI để nhận kết quả phân tích khối u não.</p>
@@ -62,7 +160,6 @@
       </div>
 
       <div id="preview"></div>
-      <div id="output"></div>
     </div>
   </div>
 
@@ -71,7 +168,6 @@
     const fileInput  = document.getElementById('fileInput');
     const preview    = document.getElementById('preview');
 
-    // Xử lý paste từ clipboard
     uploadArea.addEventListener('paste', e => {
       const items = e.clipboardData.items;
       for (let i = 0; i < items.length; i++) {
@@ -82,13 +178,11 @@
       }
     });
 
-    // Xử lý chọn file từ máy
     fileInput.addEventListener('change', e => {
       const file = e.target.files[0];
       if (file) showImage(file);
     });
 
-    // Hiển thị ảnh và mô phỏng kết quả
     function showImage(file) {
       const reader = new FileReader();
       reader.onload = function(ev) {
@@ -100,3 +194,4 @@
 
 </body>
 </html>
+""
