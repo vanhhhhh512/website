@@ -4,16 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chẩn đoán u não bằng MRI</title>
+
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
   <style>
     body {
       margin: 0;
       padding: 0;
       font-family: 'Roboto', Arial, sans-serif;
       color: white;
-      display: flex;
-      background: none;
+      background-color: #121212;
+      overflow: hidden;
     }
+
     #background-video {
       position: fixed;
       top: 0;
@@ -21,103 +25,97 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      z-index: -2;
-    }
-    /* Overlay to darken the background */
-    .video-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5); /* Darken by 50% */
       z-index: -1;
     }
-    .sidebar-img-wrapper {
-      width: 70px;
-      background-color: #002855;
-      padding: 10px 5px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      position: fixed;
-      top: 0;
-      left: 0;
-      bottom: 0;
+
+    .main-content {
+      position: relative;
       z-index: 10;
     }
-    .sidebar-img {
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-      border-radius: 10px;
-    }
-    .sidebar-bg-fill {
-      flex-grow: 1;
-      width: 100%;
-      background-color: #002855;
-    }
-    .main-content {
-      margin-left: 90px;
-      flex: 1;
-      padding: 20px;
-      position: relative;
-      z-index: 5;
-    }
+
     .banner {
-      background: rgba(245, 245, 245, 0.9);
-      color: black;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 20px;
-      border-radius: 0 0 16px 16px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 5px 15px;
+      background-color: rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      margin: 10px 20px;
     }
+
+    .left {
+      display: flex;
+      align-items: center;
+    }
+
+    .left img {
+      width: 40px;
+      margin-right: 10px;
+    }
+
+    .left span {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .right {
+      display: flex;
+      align-items: center;
+    }
+
+    .right img {
+      width: 25px;
+      margin-right: 5px;
+    }
+
+    .right span {
+      font-size: 16px;
+      font-weight: bold;
+      line-height: 1;
+    }
+
     .container {
-      max-width: 700px;
-      margin: 40px auto;
       text-align: center;
-      background-color: rgba(255, 255, 255, 0.85);
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      margin-top: 40px;
     }
-    h1 {
-      color: #007ACC;
-      text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+
+    .container h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+      color: #00aaff;
     }
+
+    .container p {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
     .upload-area {
-      margin-top: 20px;
-      border: 2px solid #007ACC;
-      padding: 20px;
-      border-radius: 8px;
-      background-color: rgba(255, 255, 255, 0.95);
-      transition: background-color 0.3s ease;
+      display: inline-block;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 15px;
+      border-radius: 12px;
+      border: 2px dashed #00aaff;
+      max-width: 350px;
+      width: 100%;
     }
-    .upload-area:hover {
-      background-color: rgba(224, 247, 255, 0.95);
-      cursor: pointer;
+
+    .upload-area input {
+      margin-top: 10px;
     }
-    #preview img {
-      max-width: 100%;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    #preview {
       margin-top: 20px;
     }
   </style>
 </head>
 <body>
+
   <video autoplay muted loop id="background-video">
     <source src="background-video.mp4" type="video/mp4">
     Trình duyệt của bạn không hỗ trợ video nền.
   </video>
-  <div class="video-overlay"></div>
-  <div class="sidebar-img-wrapper">
-    <img src="4adedcff-4558-4151-9d63-f0831754eed3.png" alt="Sidebar Menu" class="sidebar-img">
-    <div class="sidebar-bg-fill"></div>
-  </div>
+
   <div class="main-content">
     <div class="banner">
       <div class="left">
@@ -129,15 +127,20 @@
         <span>069669699</span>
       </div>
     </div>
+
     <div class="container">
       <h1>UNetBrainSeg</h1>
       <p>Tải lên hoặc dán ảnh MRI để nhận kết quả phân tích khối u não.</p>
+
       <div class="upload-area" id="uploadArea">
         <input type="file" id="fileInput" accept="image/*"><br>
         <p>Hoặc nhấn <strong>Ctrl + V</strong> để dán ảnh từ clipboard</p>
       </div>
+
       <div id="preview"></div>
     </div>
   </div>
+
 </body>
-</html>""
+</html>
+""
