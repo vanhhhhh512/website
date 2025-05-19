@@ -1,4 +1,3 @@
-""
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -6,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chẩn đoán u não bằng MRI</title>
 
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
   <style>
@@ -19,6 +19,7 @@
       display: flex;
     }
 
+    /* Sidebar as image */
     .sidebar-img-wrapper {
       width: 70px;
       background-color: #002855;
@@ -47,29 +48,32 @@
       background-color: #002855;
     }
 
+    /* Main content */
     .main-content {
-      margin-left: 90px;
+      margin-left: 90px; /* space for sidebar */
       flex: 1;
       padding: 20px;
     }
 
+    /* Banner */
     .banner {
       background: rgba(245, 245, 245, 0.9);
       color: black;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 5px 15px;
+      padding: 10px 20px;
       border-radius: 0 0 16px 16px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
     .banner img {
-      width: 24px;
-      height: 24px;
-      margin-right: 6px;
+      width: 32px;
+      height: 32px;
+      margin-right: 8px;
     }
 
+    /* Container */
     .container {
       max-width: 700px;
       margin: 40px auto;
@@ -85,6 +89,7 @@
       border: 2px dashed #007ACC;
       padding: 20px;
       border-radius: 8px;
+      transition: background-color 0.3s ease;
       background-color: rgba(255, 255, 255, 0.8);
     }
 
@@ -97,22 +102,38 @@
       margin-bottom: 10px;
     }
 
+    .upload-area p {
+      margin: 10px 0;
+      font-size: 14px;
+      color: #333;
+    }
+
     #preview img {
       max-width: 100%;
       border-radius: 8px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       margin-top: 20px;
     }
+
+    #output {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #008000;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
 
+  <!-- Sidebar image -->
   <div class="sidebar-img-wrapper">
     <img src="4adedcff-4558-4151-9d63-f0831754eed3.png" alt="Sidebar Menu" class="sidebar-img">
     <div class="sidebar-bg-fill"></div>
   </div>
 
+  <!-- Main content -->
   <div class="main-content">
+    <!-- Banner -->
     <div class="banner">
       <div class="left">
         <img src="hospital-icon.png" alt="Hospital logo">
@@ -124,6 +145,7 @@
       </div>
     </div>
 
+    <!-- Container -->
     <div class="container">
       <h1>UNetBrainSeg</h1>
       <p>Tải lên hoặc dán ảnh MRI để nhận kết quả phân tích khối u não.</p>
@@ -137,7 +159,38 @@
       <div id="output"></div>
     </div>
   </div>
-  
+
+  <script>
+    const uploadArea = document.getElementById('uploadArea');
+    const fileInput  = document.getElementById('fileInput');
+    const preview    = document.getElementById('preview');
+    const output     = document.getElementById('output');
+
+    // Xử lý paste từ clipboard
+    uploadArea.addEventListener('paste', e => {
+      const items = e.clipboardData.items;
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].type.indexOf('image') !== -1) {
+          const blob = items[i].getAsFile();
+          showImage(blob);
+        }
+      }
+    });
+
+    // Xử lý chọn file từ máy
+    fileInput.addEventListener('change', e => {
+      const file = e.target.files[0];
+      if (file) showImage(file);
+    });
+
+    // Hiển thị ảnh và mô phỏng kết quả
+    function showImage(file) {
+      const reader = new FileReader();
+      reader.onload = function(ev) {
+        preview.innerHTML = <img src="${ev.target.result}" alt="Preview Image">;
+      };
+      reader.readAsDataURL(file);
+    }
+  </script>
 </body>
 </html>
-            ""
