@@ -87,14 +87,24 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
+    .left {
+      display: flex;
+      align-items: center;
+    }
+
+    .left img {
+      margin-right: 10px;
+    }
+
     .container {
       max-width: 700px;
       margin: 40px auto;
       text-align: center;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.4);
       padding: 20px;
       border-radius: 12px;
       backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
     }
 
     h1 {
@@ -147,7 +157,7 @@
     <div class="banner">
       <div class="left">
         <img src="hospital-icon.png" alt="Hospital logo">
-        <span>Trường Đại học Công Nghệ - Đại học Quốc gia Hà Nội</span>
+        <span style="vertical-align: middle;">Trường Đại học Công Nghệ - Đại học Quốc gia Hà Nội</span>
       </div>
       <div class="right">
         <img src="phone-icon.png" alt="Phone icon">
