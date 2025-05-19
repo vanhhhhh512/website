@@ -4,10 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chẩn đoán u não bằng MRI</title>
-
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-
   <style>
     body {
       margin: 0;
@@ -17,8 +14,6 @@
       display: flex;
       background: none;
     }
-
-    /* Video Background */
     #background-video {
       position: fixed;
       top: 0;
@@ -28,19 +23,16 @@
       object-fit: cover;
       z-index: -2;
     }
-
-    /* Overlay */
-    #overlay {
+    /* Overlay to darken the background */
+    .video-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.5); /* Mờ nhẹ */
+      background-color: rgba(0, 0, 0, 0.5); /* Darken by 50% */
       z-index: -1;
     }
-
-    /* Sidebar as image */
     .sidebar-img-wrapper {
       width: 70px;
       background-color: #002855;
@@ -55,21 +47,17 @@
       bottom: 0;
       z-index: 10;
     }
-
     .sidebar-img {
       width: 100%;
       height: auto;
       object-fit: contain;
       border-radius: 10px;
     }
-
     .sidebar-bg-fill {
       flex-grow: 1;
       width: 100%;
       background-color: #002855;
     }
-
-    /* Main content */
     .main-content {
       margin-left: 90px;
       flex: 1;
@@ -77,60 +65,41 @@
       position: relative;
       z-index: 5;
     }
-
-    /* Banner */
     .banner {
       background: rgba(245, 245, 245, 0.9);
       color: black;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 5px 15px;
+      padding: 10px 20px;
       border-radius: 0 0 16px 16px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
-
-    .banner img {
-      width: 28px;
-      height: 28px;
-      margin-right: 8px;
-    }
-
-    .banner .left, .banner .right {
-      display: flex;
-      align-items: center;
-    }
-
-    /* Container */
     .container {
       max-width: 700px;
       margin: 40px auto;
       text-align: center;
-      background-color: rgba(255, 255, 255, 0.9);
+      background-color: rgba(255, 255, 255, 0.85);
       padding: 20px;
       border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
-
     h1 {
       color: #007ACC;
-      font-weight: bold;
-      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+      text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
     }
-
     .upload-area {
       margin-top: 20px;
-      border: 2px dashed #007ACC;
+      border: 2px solid #007ACC;
       padding: 20px;
       border-radius: 8px;
-      transition: background-color 0.3s ease;
       background-color: rgba(255, 255, 255, 0.95);
+      transition: background-color 0.3s ease;
     }
-
     .upload-area:hover {
       background-color: rgba(224, 247, 255, 0.95);
       cursor: pointer;
     }
-
     #preview img {
       max-width: 100%;
       border-radius: 8px;
@@ -140,25 +109,16 @@
   </style>
 </head>
 <body>
-
-  <!-- Video Background -->
   <video autoplay muted loop id="background-video">
     <source src="background-video.mp4" type="video/mp4">
     Trình duyệt của bạn không hỗ trợ video nền.
   </video>
-
-  <!-- Overlay -->
-  <div id="overlay"></div>
-
-  <!-- Sidebar image -->
+  <div class="video-overlay"></div>
   <div class="sidebar-img-wrapper">
     <img src="4adedcff-4558-4151-9d63-f0831754eed3.png" alt="Sidebar Menu" class="sidebar-img">
     <div class="sidebar-bg-fill"></div>
   </div>
-
-  <!-- Main content -->
   <div class="main-content">
-    <!-- Banner -->
     <div class="banner">
       <div class="left">
         <img src="hospital-icon.png" alt="Hospital logo">
@@ -169,21 +129,15 @@
         <span>069669699</span>
       </div>
     </div>
-
-    <!-- Container -->
     <div class="container">
       <h1>UNetBrainSeg</h1>
       <p>Tải lên hoặc dán ảnh MRI để nhận kết quả phân tích khối u não.</p>
-
       <div class="upload-area" id="uploadArea">
         <input type="file" id="fileInput" accept="image/*"><br>
         <p>Hoặc nhấn <strong>Ctrl + V</strong> để dán ảnh từ clipboard</p>
       </div>
-
       <div id="preview"></div>
     </div>
   </div>
-
 </body>
-</html>
-""
+</html>""
