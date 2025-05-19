@@ -13,10 +13,19 @@
       margin: 0;
       padding: 0;
       font-family: 'Roboto', Arial, sans-serif;
-      background: url('background-image.png') no-repeat center center fixed;
-      background-size: cover;
       color: white;
       display: flex;
+    }
+
+    /* Video Background */
+    .video-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
     }
 
     /* Sidebar as image */
@@ -50,7 +59,7 @@
 
     /* Main content */
     .main-content {
-      margin-left: 90px; /* space for sidebar */
+      margin-left: 90px;
       flex: 1;
       padding: 20px;
     }
@@ -78,6 +87,7 @@
       max-width: 700px;
       margin: 40px auto;
       text-align: center;
+      position: relative;
     }
 
     h1 {
@@ -98,16 +108,6 @@
       cursor: pointer;
     }
 
-    .upload-area input {
-      margin-bottom: 10px;
-    }
-
-    .upload-area p {
-      margin: 10px 0;
-      font-size: 14px;
-      color: #333;
-    }
-
     #preview img {
       max-width: 100%;
       border-radius: 8px;
@@ -115,15 +115,15 @@
       margin-top: 20px;
     }
 
-    #output {
-      margin-top: 20px;
-      font-size: 18px;
-      color: #008000;
-      font-weight: bold;
-    }
   </style>
 </head>
 <body>
+
+  <!-- Video Background -->
+  <video autoplay muted loop class="video-bg">
+    <source src="your-video.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
 
   <!-- Sidebar image -->
   <div class="sidebar-img-wrapper">
@@ -156,41 +156,7 @@
       </div>
 
       <div id="preview"></div>
-      <div id="output"></div>
     </div>
   </div>
-
-  <script>
-    const uploadArea = document.getElementById('uploadArea');
-    const fileInput  = document.getElementById('fileInput');
-    const preview    = document.getElementById('preview');
-    const output     = document.getElementById('output');
-
-    // Xử lý paste từ clipboard
-    uploadArea.addEventListener('paste', e => {
-      const items = e.clipboardData.items;
-      for (let i = 0; i < items.length; i++) {
-        if (items[i].type.indexOf('image') !== -1) {
-          const blob = items[i].getAsFile();
-          showImage(blob);
-        }
-      }
-    });
-
-    // Xử lý chọn file từ máy
-    fileInput.addEventListener('change', e => {
-      const file = e.target.files[0];
-      if (file) showImage(file);
-    });
-
-    // Hiển thị ảnh và mô phỏng kết quả
-    function showImage(file) {
-      const reader = new FileReader();
-      reader.onload = function(ev) {
-        preview.innerHTML = `<img src="${ev.target.result}" alt="Preview Image">`;
-      };
-      reader.readAsDataURL(file);
-    }
-  </script>
 </body>
 </html>
