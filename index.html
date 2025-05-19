@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chẩn đoán u não bằng MRI</title>
+
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
   <style>
@@ -17,18 +19,19 @@
       display: flex;
     }
 
-    /* Sidebar image wrapper */
+    /* Sidebar as image */
     .sidebar-img-wrapper {
       width: 70px;
-      background-color: #002855; /* Đậm để phân biệt thanh */
+      background-color: #002855;
       padding: 10px 5px;
       display: flex;
-      justify-content: center;
-      align-items: flex-start;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
       position: fixed;
       top: 0;
       left: 0;
-      height: auto;
+      bottom: 0;
       z-index: 10;
     }
 
@@ -39,13 +42,20 @@
       border-radius: 10px;
     }
 
+    .sidebar-bg-fill {
+      flex-grow: 1;
+      width: 100%;
+      background-color: #002855;
+    }
+
     /* Main content */
     .main-content {
-      margin-left: 80px;
+      margin-left: 90px; /* space for sidebar */
       flex: 1;
       padding: 20px;
     }
 
+    /* Banner */
     .banner {
       background: rgba(245, 245, 245, 0.9);
       color: black;
@@ -63,6 +73,7 @@
       margin-right: 8px;
     }
 
+    /* Container */
     .container {
       max-width: 700px;
       margin: 40px auto;
@@ -110,24 +121,14 @@
       color: #008000;
       font-weight: bold;
     }
-
-    @media (max-width: 768px) {
-      .sidebar-img-wrapper {
-        display: none;
-      }
-
-      .main-content {
-        margin-left: 0;
-        padding: 10px;
-      }
-    }
   </style>
 </head>
 <body>
 
-  <!-- Sidebar image wrapper -->
+  <!-- Sidebar image -->
   <div class="sidebar-img-wrapper">
     <img src="4adedcff-4558-4151-9d63-f0831754eed3.png" alt="Sidebar Menu" class="sidebar-img">
+    <div class="sidebar-bg-fill"></div>
   </div>
 
   <!-- Main content -->
@@ -182,15 +183,11 @@
       if (file) showImage(file);
     });
 
-    // Hàm hiển thị ảnh + tạo kết quả giả lập
+    // Hiển thị ảnh và mô phỏng kết quả
     function showImage(file) {
       const reader = new FileReader();
       reader.onload = function(ev) {
         preview.innerHTML = `<img src="${ev.target.result}" alt="Preview Image">`;
-        output.innerHTML = "Đang phân tích...";
-        setTimeout(() => {
-          output.innerHTML = "Kết quả: Phát hiện khối u nhỏ (giả lập)";
-        }, 2000);
       };
       reader.readAsDataURL(file);
     }
