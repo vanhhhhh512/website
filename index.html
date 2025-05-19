@@ -14,8 +14,8 @@
       padding: 0;
       font-family: 'Roboto', Arial, sans-serif;
       color: white;
+      overflow: hidden;
       display: flex;
-      background: none;
     }
 
     /* Video Background */
@@ -29,7 +29,18 @@
       z-index: -1;
     }
 
-    /* Sidebar as image */
+    /* Overlay */
+    #video-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 0;
+    }
+
+    /* Sidebar */
     .sidebar-img-wrapper {
       width: 70px;
       background-color: #002855;
@@ -58,16 +69,13 @@
       background-color: #002855;
     }
 
-    /* Main content */
     .main-content {
       margin-left: 90px;
       flex: 1;
       padding: 20px;
-      position: relative;
-      z-index: 5;
+      z-index: 20;
     }
 
-    /* Banner */
     .banner {
       background: rgba(245, 245, 245, 0.9);
       color: black;
@@ -79,45 +87,41 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
-    .banner img {
-      width: 32px;
-      height: 32px;
-      margin-right: 8px;
-    }
-
-    /* Container */
     .container {
       max-width: 700px;
       margin: 40px auto;
       text-align: center;
-      background-color: rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.1);
       padding: 20px;
-      border-radius: 8px;
+      border-radius: 12px;
+      backdrop-filter: blur(5px);
     }
 
     h1 {
-      color: #007ACC;
+      color: #00aaff;
+      text-shadow: 1px 1px 4px black;
     }
 
     .upload-area {
       margin-top: 20px;
-      border: 2px dashed #007ACC;
+      border: 2px dashed #00aaff;
       padding: 20px;
       border-radius: 8px;
       transition: background-color 0.3s ease;
-      background-color: rgba(255, 255, 255, 0.8);
+      background-color: rgba(0, 0, 0, 0.3);
+      color: white;
     }
 
     .upload-area:hover {
-      background-color: rgba(224, 247, 255, 0.95);
+      background-color: rgba(0, 170, 255, 0.2);
       cursor: pointer;
     }
 
     #preview img {
       max-width: 100%;
       border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       margin-top: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
   </style>
 </head>
@@ -129,6 +133,9 @@
     Trình duyệt của bạn không hỗ trợ video nền.
   </video>
 
+  <!-- Overlay -->
+  <div id="video-overlay"></div>
+
   <!-- Sidebar image -->
   <div class="sidebar-img-wrapper">
     <img src="4adedcff-4558-4151-9d63-f0831754eed3.png" alt="Sidebar Menu" class="sidebar-img">
@@ -137,7 +144,6 @@
 
   <!-- Main content -->
   <div class="main-content">
-    <!-- Banner -->
     <div class="banner">
       <div class="left">
         <img src="hospital-icon.png" alt="Hospital logo">
@@ -149,49 +155,16 @@
       </div>
     </div>
 
-    <!-- Container -->
     <div class="container">
       <h1>UNetBrainSeg</h1>
       <p>Tải lên hoặc dán ảnh MRI để nhận kết quả phân tích khối u não.</p>
-
       <div class="upload-area" id="uploadArea">
         <input type="file" id="fileInput" accept="image/*"><br>
         <p>Hoặc nhấn <strong>Ctrl + V</strong> để dán ảnh từ clipboard</p>
       </div>
-
       <div id="preview"></div>
+      <div id="output"></div>
     </div>
   </div>
-
-  <script>
-    const uploadArea = document.getElementById('uploadArea');
-    const fileInput  = document.getElementById('fileInput');
-    const preview    = document.getElementById('preview');
-
-    uploadArea.addEventListener('paste', e => {
-      const items = e.clipboardData.items;
-      for (let i = 0; i < items.length; i++) {
-        if (items[i].type.indexOf('image') !== -1) {
-          const blob = items[i].getAsFile();
-          showImage(blob);
-        }
-      }
-    });
-
-    fileInput.addEventListener('change', e => {
-      const file = e.target.files[0];
-      if (file) showImage(file);
-    });
-
-    function showImage(file) {
-      const reader = new FileReader();
-      reader.onload = function(ev) {
-        preview.innerHTML = `<img src="${ev.target.result}" alt="Preview Image">`;
-      };
-      reader.readAsDataURL(file);
-    }
-  </script>
-
 </body>
-</html>
-""
+</html>""
