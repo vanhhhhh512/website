@@ -9,51 +9,60 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
   <style>
+    /* Body styles */
     body {
       margin: 0;
       padding: 0;
-      border-left: 8px solid #4CB1F7;
-      border-right: 8px solid #4CB1F7;
-      border-top: 8px solid #4CB1F7;
       font-family: 'Roboto', Arial, sans-serif;
-      background: #f0f8ff;
+      background: url('background-image.png') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
       display: flex;
     }
 
     /* Sidebar */
     .sidebar {
       width: 220px;
-      background-color: #1A237E;
+      background-color: rgba(26, 35, 126, 0.95);
       color: white;
       height: 100vh;
       position: fixed;
       top: 0;
       left: 0;
-      padding-top: 20px;
-    }
-
-    .sidebar .logo {
-      display: block;
-      margin: 0 auto 20px auto;
-      width: 80px;
-    }
-
-    .sidebar .menu {
       display: flex;
       flex-direction: column;
       align-items: center;
+      padding-top: 20px;
     }
 
-    .sidebar .menu div {
-      padding: 15px 0;
+    .sidebar img {
+      width: 80px;
+      margin-bottom: 20px;
+    }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
       width: 100%;
-      text-align: center;
+      padding: 15px 0;
+      font-size: 16px;
       font-weight: bold;
+      text-align: left;
       cursor: pointer;
     }
 
-    .sidebar .menu div:hover {
-      background-color: #283593;
+    .menu-item:hover {
+      background-color: rgba(40, 53, 147, 0.95);
+    }
+
+    .menu-item img {
+      width: 24px;
+      height: 24px;
+      margin: 0 10px;
+    }
+
+    .menu-item span {
+      flex-grow: 1;
     }
 
     /* Main content */
@@ -65,29 +74,20 @@
 
     /* Banner */
     .banner {
-      background: #f5f5f5;
+      background: rgba(245, 245, 245, 0.9);
+      color: black;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 10px 20px;
       border-radius: 0 0 16px 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-
-    .banner .left, .banner .right {
-      display: flex;
-      align-items: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
     .banner img {
       width: 32px;
       height: 32px;
       margin-right: 8px;
-    }
-
-    .banner .left span, .banner .right span {
-      font-size: 18px;
-      font-weight: bold;
     }
 
     /* Container */
@@ -107,10 +107,11 @@
       padding: 20px;
       border-radius: 8px;
       transition: background-color 0.3s ease;
+      background-color: rgba(255, 255, 255, 0.8);
     }
 
     .upload-area:hover {
-      background-color: #e0f7ff;
+      background-color: rgba(224, 247, 255, 0.95);
       cursor: pointer;
     }
 
@@ -127,7 +128,7 @@
     #preview img {
       max-width: 100%;
       border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       margin-top: 20px;
     }
 
@@ -143,16 +144,30 @@
 
   <!-- Sidebar -->
   <div class="sidebar">
-    <img src="uet-logo.png" alt="UET Logo" class="logo">
-    <div class="menu">
-      <div>Giới thiệu</div>
-      <div>Đào tạo</div>
-      <div>Sinh viên</div>
-      <div>Khoa học – Công nghệ</div>
-      <div>Tuyển sinh</div>
-      <div>Tuyển dụng</div>
-      <div>Khoa – Viện</div>
-      <div>Olympic</div>
+    <img src="uet-logo.png" alt="UET Logo">
+    <div class="menu-item">
+      <img src="account-icon.png" alt="Account Icon">
+      <span>Account</span>
+    </div>
+    <div class="menu-item">
+      <img src="dashboard-icon.png" alt="Dashboard Icon">
+      <span>Dashboard</span>
+    </div>
+    <div class="menu-item">
+      <img src="courses-icon.png" alt="Courses Icon">
+      <span>Courses</span>
+    </div>
+    <div class="menu-item">
+      <img src="calendar-icon.png" alt="Calendar Icon">
+      <span>Calendar</span>
+    </div>
+    <div class="menu-item">
+      <img src="inbox-icon.png" alt="Inbox Icon">
+      <span>Inbox</span>
+    </div>
+    <div class="menu-item">
+      <img src="help-icon.png" alt="Help Icon">
+      <span>Help</span>
     </div>
   </div>
 
@@ -175,7 +190,7 @@
       <h1>UNetBrainSeg</h1>
       <p>Tải lên hoặc dán ảnh MRI để nhận kết quả phân tích khối u não.</p>
 
-      <div class="upload-area" id="uploadArea" contenteditable="true">
+      <div class="upload-area" id="uploadArea">
         <input type="file" id="fileInput" accept="image/*"><br>
         <p>Hoặc nhấn <strong>Ctrl + V</strong> để dán ảnh từ clipboard</p>
       </div>
@@ -212,6 +227,10 @@
     function showImage(file) {
       const reader = new FileReader();
       reader.onload = function(ev) {
-        preview.inner
-::contentReference[oaicite:5]{index=5}
- 
+        preview.innerHTML = `<img src="${ev.target.result}" alt="Preview Image">`;
+      };
+      reader.readAsDataURL(file);
+    }
+  </script>
+</body>
+</html>
