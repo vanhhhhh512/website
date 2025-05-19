@@ -17,20 +17,31 @@
       display: flex;
     }
 
-    /* Sidebar as image */
-    .sidebar-img {
-      width: 100px;
-      height: 100vh;
-      object-fit: cover;
+    /* Sidebar image wrapper */
+    .sidebar-img-wrapper {
+      width: 70px;
+      background-color: #002855; /* Đậm để phân biệt thanh */
+      padding: 10px 5px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
       position: fixed;
       top: 0;
       left: 0;
+      height: auto;
       z-index: 10;
+    }
+
+    .sidebar-img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 10px;
     }
 
     /* Main content */
     .main-content {
-      margin-left: 100px;
+      margin-left: 80px;
       flex: 1;
       padding: 20px;
     }
@@ -101,7 +112,7 @@
     }
 
     @media (max-width: 768px) {
-      .sidebar-img {
+      .sidebar-img-wrapper {
         display: none;
       }
 
@@ -114,8 +125,10 @@
 </head>
 <body>
 
-  <!-- Sidebar image -->
-  <img src="4adedcff-4558-4151-9d63-f0831754eed3.png" alt="Sidebar Menu" class="sidebar-img">
+  <!-- Sidebar image wrapper -->
+  <div class="sidebar-img-wrapper">
+    <img src="4adedcff-4558-4151-9d63-f0831754eed3.png" alt="Sidebar Menu" class="sidebar-img">
+  </div>
 
   <!-- Main content -->
   <div class="main-content">
